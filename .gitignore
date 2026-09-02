@@ -1,0 +1,17 @@
+# Local run logs — regenerated every run, not worth versioning
+*.log
+scan-output.txt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Never commit credentials
+.env
+*.token
+secrets/
+
+# Uncompressed snapshots — the workflow gzips them before commit
+snapshots/*.json

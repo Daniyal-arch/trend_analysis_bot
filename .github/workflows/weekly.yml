@@ -1,0 +1,84 @@
+name: weekly scan
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"          # Mondays 06:00 UTC. Actions cron can lag hours
+                                 # under load — fine for a weekly series.
+  workflow_dispatch:              # manual trigger — USE THIS FIRST, see README
+    inputs:
+      dry_run:
+        description: "Collect and report, but do not commit"
+        type: boolean
+        default: false
+
+# Without this, two overlapping runs both try to push and one loses its snapshot.
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Token via env, never argv — argv is visible in the process list, and on a
+      # public repo the Actions log is public too.
+      - name: Run scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        run: python -u scan.py | tee scan-output.txt
+
+      - name: Refresh watchlist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -u watchlist.py | tee -a scan-output.txt
+
+      - name: Analyse
+        run: python -u analyze.py | tee -a scan-output.txt
+
+      # Snapshots are a few MB each. 52/year uncompressed makes the repo slow to
+      # clone within a couple of years; gzip is ~10x and git stores it fine.
+      - name: Compress snapshot
+        run: |
+          for f in snapshots/*.json; do
+            [ -e "$f" ] || continue
+            gzip -9 -f "$f"
+          done
+
+      - name: Commit
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name  "trend-scan"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Another commit may have landed since checkout; rebase or the push is
+          # rejected and the run is wasted.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git add snapshots/ watchlist.json
+          git diff --staged --quiet || git commit -m "snapshot $(date -u +%Y-%m-%d)"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-report-${{ github.run_number }}
+          path: scan-output.txt
+          retention-days: 90
+
+      # A silently broken scan looks exactly like a quiet week. Fail loudly.
+      - name: Flag failure
+        if: failure()
+        run: |
+          echo "::error::Scan failed. Check whether a source started blocking" \
+               "GitHub Actions IPs — Reddit and Bluesky are the likely candidates."
