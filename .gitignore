@@ -15,3 +15,15 @@ secrets/
 
 # Uncompressed snapshots — the workflow gzips them before commit
 snapshots/*.json
+
+# Generated artifacts and isolated integration runs
+reports/
+reports-preview/
+.local-data/
+.test-data/
+.pytest_cache/
+*.db
+*.db-shm
+*.db-wal
+data/imports/*.json
+!data/imports/*.example.json

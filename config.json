@@ -1,0 +1,30 @@
+{
+  "markets": ["us", "gb", "ca", "au", "pk"],
+  "language": "en",
+  "timezone": "Asia/Karachi",
+  "recipient": "daniyalnahk@gmail.com",
+  "smtp": {"host": "smtp.gmail.com", "port": 587, "username": "daniyalnahk@gmail.com"},
+  "sources": ["apple", "google_play", "freelancer", "peopleperhour", "marketplace_pages", "remote_feeds", "web_search", "revenue_news", "intelligence"],
+  "scraping": {"browser_fallback": true, "max_browser_pages": 8, "browser_timeout_seconds": 40},
+  "limits": {
+    "chart_size": 100,
+    "search_results": 25,
+    "apple_interval_seconds": 3.1,
+    "google_interval_seconds": 1.5,
+    "google_workers": 4,
+    "google_details": 180,
+    "reviews_per_store": 45,
+    "reviews_per_app": 30,
+    "freelancer_pages": 8,
+    "freelancer_page_size": 100,
+    "peopleperhour_pages": 20,
+    "web_queries": 150,
+    "news_queries": 27,
+    "timeout_seconds": 25,
+    "retries": 3,
+    "run_minutes": 85
+  },
+  "report": {"top_opportunities": 12, "examples_per_category": 5},
+  "extra_feeds": [],
+  "intelligence_file": "data/imports/app-intelligence.json"
+}

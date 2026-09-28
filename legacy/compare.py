@@ -26,7 +26,7 @@ def _open(path):
 def _tag(path):
     return os.path.basename(path).replace('.json.gz', '').replace('.json', '')
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SNAP = os.path.join(HERE, "snapshots")
 
 

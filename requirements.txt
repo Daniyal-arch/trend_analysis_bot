@@ -1,0 +1,5 @@
+requests==2.34.2
+reportlab==5.0.1
+google-play-scraper==1.2.7
+tzdata==2026.4
+scrapling[fetchers]==0.4.15
