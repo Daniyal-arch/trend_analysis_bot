@@ -67,7 +67,8 @@ def pdf_report(report, path):
     add("TRENDSCAN  /  MARKET RESEARCH", "Sub")
     add(title, "Cover")
     add(f"{report['period'].upper()}  |  {report['start']} to {report['end']}", "Section")
-    add(f"Prepared {report['as_of']}  |  Markets: {', '.join(m.upper() for m in report['markets'])}")
+    scope = ("App markets: " + (", ".join(m.upper() for m in report["markets"]) or "no observations")) if report["track"] == "apps" else "Scope: global public freelance listings"
+    add(f"As of {report['as_of']}  |  {scope}")
     if report.get("quick_scan"):
         add("INTEGRATION SAMPLE: reduced collection budgets. Do not treat this as full market coverage.", "Sub")
     add(f"Coverage: {report['scan_days']} of {report['expected_days']} expected daily snapshots; previous comparison window: {report['previous_scan_days']} snapshots.")
