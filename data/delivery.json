@@ -150,5 +150,13 @@
   "daniyalnahk@gmail.com|daily|2026-10-31|2026-10-31": {
     "sent_at": "2026-10-31T08:39:44.673784+00:00",
     "message_id": "<trendscan-69215e806352507f392f3901c6fd@trendscan.local>"
+  },
+  "daniyalnahk@gmail.com|daily|2026-11-01|2026-11-01": {
+    "sent_at": "2026-11-01T09:29:02.994108+00:00",
+    "message_id": "<trendscan-a03e9209396170912bb350a66d9e@trendscan.local>"
+  },
+  "daniyalnahk@gmail.com|monthly|2026-10-01|2026-10-31": {
+    "sent_at": "2026-11-01T09:29:05.998546+00:00",
+    "message_id": "<trendscan-fbd01c1d420614732a33b940914f@trendscan.local>"
   }
 }
