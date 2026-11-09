@@ -190,5 +190,13 @@
   "daniyalnahk@gmail.com|daily|2026-11-08|2026-11-08": {
     "sent_at": "2026-11-08T09:12:51.783883+00:00",
     "message_id": "<trendscan-66e3b5fdf32b93a18a6dadb9be35@trendscan.local>"
+  },
+  "daniyalnahk@gmail.com|daily|2026-11-09|2026-11-09": {
+    "sent_at": "2026-11-09T10:01:52.878427+00:00",
+    "message_id": "<trendscan-550011c05b01a97c37e400e6e013@trendscan.local>"
+  },
+  "daniyalnahk@gmail.com|weekly|2026-11-02|2026-11-08": {
+    "sent_at": "2026-11-09T10:01:57.363061+00:00",
+    "message_id": "<trendscan-f20dca04323b0a13ec6259896420@trendscan.local>"
   }
 }
