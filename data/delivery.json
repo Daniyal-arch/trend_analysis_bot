@@ -222,5 +222,13 @@
   "daniyalnahk@gmail.com|daily|2026-11-15|2026-11-15": {
     "sent_at": "2026-11-15T09:38:56.833845+00:00",
     "message_id": "<trendscan-67d07b8848079b975dc8e8f803df@trendscan.local>"
+  },
+  "daniyalnahk@gmail.com|daily|2026-11-16|2026-11-16": {
+    "sent_at": "2026-11-16T09:56:36.573361+00:00",
+    "message_id": "<trendscan-cb271fadaf28c30f49f92e372302@trendscan.local>"
+  },
+  "daniyalnahk@gmail.com|weekly|2026-11-09|2026-11-15": {
+    "sent_at": "2026-11-16T09:56:38.571327+00:00",
+    "message_id": "<trendscan-bd9910777032cd48e2864958f1f9@trendscan.local>"
   }
 }
